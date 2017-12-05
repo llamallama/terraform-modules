@@ -1,9 +1,3 @@
-provider "aws" {
- region = "us-east-1"
- profile = "chris"
-}
-
-
 resource "aws_security_group" "nextcloud" {
   name = "nextcloud-security-group"
 

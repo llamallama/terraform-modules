@@ -2,7 +2,7 @@ variable "vpc_id" {
   description = "The ID of the VPC"
 }
 variable "subnet_id" {
-  description = "The ID of the subnet"  
+  description = "The ID of the subnet"
 }
 variable "ami" {
   description = "The AMI to use"
@@ -15,4 +15,8 @@ variable "key_name" {
 variable "nextcloud_url" {
   description = "The nextCloud release to download"
   default = "https://download.nextcloud.com/server/releases/latest.tar.bz2"
+}
+variable "security_groups" {
+  description = "Security groups to use"
+  default = ""
 }

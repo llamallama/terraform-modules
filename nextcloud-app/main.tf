@@ -48,7 +48,7 @@ resource "aws_instance" "nextcloud" {
   instance_type = "t2.micro"
   user_data = "${data.template_file.user_data.rendered}"
   key_name = "${var.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.nextcloud.id}"]
+  vpc_security_group_ids = ["${var.security_groups}","${aws_security_group.nextcloud.id}"]
   subnet_id = "${var.subnet_id}"
 
   tags {

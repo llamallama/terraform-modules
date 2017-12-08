@@ -74,7 +74,7 @@ resource "aws_instance" "nextcloud" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/provision.sh",
-      "sudo /tmp/provision.sh '${var.nextcloud_url}'",
+      "sudo /tmp/provision.sh '${var.nextcloud_url}' '${var.domain_name}'",
     ]
 
     connection {

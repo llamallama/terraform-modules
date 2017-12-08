@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-nextcloud_url="${1}"
+NEXTCLOUD_URL="${1}"
+DOMAIN_NAME="${2}"
 
 # Install dependencies
 yum install -y httpd71 \
@@ -16,7 +17,7 @@ yum install -y httpd71 \
 
 # Install nextcloud
 cd /var/www/html/
-wget "${nextcloud_url}" -O nextcloud.tar.bz2
+wget "${NEXTCLOUD_URL}" -O nextcloud.tar.bz2
 tar xf nextcloud.tar.bz2
 rm -f nextcloud.tar.bz2
 
@@ -26,18 +27,25 @@ chown -R apache:apache /var/www/html/nextcloud
 # Enable services (should happen last)
 chkconfig httpd on
 
-echo "Setting up configs"
+# Set up Nextcloud vhost
+sed -i "s/SERVERNAME/${DOMAIN_NAME}/g" \
+  /tmp/configs/etc/httpd/vhosts.d/nextcloud.conf
+
+# Copy configs
 chown -R root:root /tmp/configs
 find /tmp/configs -type f -exec chmod 644 {} \+
 find /tmp/configs -type d -exec chmod 755 {} \+
 rsync -av /tmp/configs/etc/ /etc/
 
+# Set up Nextcloud
 cp -f /tmp/configs/nextcloud/config.php /var/www/html/nextcloud/config/
 chown apache:apache /var/www/html/nextcloud/config/config.php
 chmod 640 /var/www/html/nextcloud/config/config.php
 
-echo "Starting services"
+# Cleaning up
+rm -rf /tmp/configs
+
 service httpd start
 
-# Hack to keep apache running
+# Hack to keep apache running when started from Terraform
 sleep 1

@@ -16,6 +16,9 @@ variable "nextcloud_url" {
   description = "The nextCloud release to download"
   default = "https://download.nextcloud.com/server/releases/latest.tar.bz2"
 }
+variable "domain_name" {
+  description = "The domain to access Nextcloud at"
+}
 variable "security_groups" {
   description = "Security groups to use"
   default = ""

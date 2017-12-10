@@ -23,3 +23,6 @@ variable "security_groups" {
   description = "Security groups to use"
   default = ""
 }
+variable "iam_instance_profile" {
+  default = ""
+}

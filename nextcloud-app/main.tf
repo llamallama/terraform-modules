@@ -46,6 +46,7 @@ resource "aws_instance" "nextcloud" {
   key_name = "${var.key_name}"
   vpc_security_group_ids = ["${var.security_groups}","${aws_security_group.nextcloud.id}"]
   subnet_id = "${var.subnet_id}"
+  iam_instance_profile = "${var.iam_instance_profile}"
 
   tags {
     Name = "NextCloud"

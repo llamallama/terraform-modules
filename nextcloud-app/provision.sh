@@ -38,7 +38,7 @@ find /tmp/configs -type d -exec chmod 755 {} \+
 rsync -av /tmp/configs/etc/ /etc/
 
 # Set up Nextcloud
-cp -f /tmp/configs/nextcloud/config.php /var/www/html/nextcloud/config/
+aws s3 cp s3://cloud.pipetogrep.org/staging/config/config.php /var/www/html/nextcloud/config/
 chown apache:apache /var/www/html/nextcloud/config/config.php
 chmod 640 /var/www/html/nextcloud/config/config.php
 

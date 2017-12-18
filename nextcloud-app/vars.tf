@@ -12,6 +12,9 @@ variable "key_name" {
   description = "The key name to allow access with"
   default = "chris"
 }
+variable "access_ip" {
+  default = "0.0.0.0/0"
+}
 variable "nextcloud_url" {
   description = "The nextCloud release to download"
   default = "https://download.nextcloud.com/server/releases/latest.tar.bz2"

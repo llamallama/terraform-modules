@@ -39,7 +39,7 @@ resource "aws_security_group" "lb_securitygroup" {
 resource "aws_lb" "lb" {
   name            = "${var.lb_name}"
   internal        = "${var.internal}"
-  security_groups = ["${aws_security_group.lb_securitygroup.id}"]
+  security_groups = ["${var.security_groups}","${aws_security_group.lb_securitygroup.id}"]
   subnets         = ["${var.subnets}"]
 
   tags {
@@ -55,14 +55,24 @@ resource "aws_lb_target_group" "tg" {
   vpc_id = "${var.vpc_id}"
 }
 
-resource "aws_lb_listener" "listener" {
+resource "aws_lb_listener" "http_listener" {
   load_balancer_arn = "${aws_lb.lb.arn}"
-  #port              = "443"
-  #protocol          = "HTTPS"
-  #ssl_policy        = "ELBSecurityPolicy-2015-05"
-  #certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
   port              = "80"
   protocol          = "HTTP"
+
+  default_action {
+    target_group_arn = "${aws_lb_target_group.tg.arn}"
+    type             = "forward"
+  }
+}
+
+resource "aws_lb_listener" "https_listener" {
+  count = "${var.use_tls}"
+  load_balancer_arn = "${aws_lb.lb.arn}"
+  ssl_policy        = "${var.ssl_policy}"
+  certificate_arn   = "${var.certificate_arn}"
+  port              = "443"
+  protocol          = "HTTPS"
 
   default_action {
     target_group_arn = "${aws_lb_target_group.tg.arn}"

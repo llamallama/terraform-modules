@@ -1,8 +1,8 @@
 variable "vpc_id" {
   description = "The ID of the VPC"
 }
-variable "subnet_id" {
-  description = "The ID of the subnet"
+variable "subnet_ids" {
+  type = "list"
 }
 variable "ami" {
   description = "The AMI to use"
@@ -28,4 +28,7 @@ variable "security_groups" {
 }
 variable "iam_instance_profile" {
   default = ""
+}
+variable "count_num" {
+  default = "1"
 }

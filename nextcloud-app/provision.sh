@@ -20,6 +20,8 @@ cd /var/www/html/
 wget "${NEXTCLOUD_URL}" -O nextcloud.tar.bz2
 tar xf nextcloud.tar.bz2
 rm -f nextcloud.tar.bz2
+mkdir /var/www/html/nextcloud/data/
+touch /var/www/html/nextcloud/data/.ocdata
 
 # Set Permissions
 chown -R apache:apache /var/www/html/nextcloud

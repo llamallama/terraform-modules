@@ -32,3 +32,6 @@ variable "iam_instance_profile" {
 variable "count_num" {
   default = "1"
 }
+variable "efs_mount_target" {
+  type = "string"
+}

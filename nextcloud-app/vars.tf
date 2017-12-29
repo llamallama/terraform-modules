@@ -35,3 +35,7 @@ variable "count_num" {
 variable "efs_mount_target" {
   type = "string"
 }
+variable "environment" {
+  type = "string"
+  default = ""
+}

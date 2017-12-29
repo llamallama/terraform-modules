@@ -13,6 +13,12 @@ resource "aws_security_group" "nextcloud" {
 
 data "template_file" "user_data" {
   template = "${file("${path.module}/user-data.tpl")}"
+
+  vars {
+    domain_name = "${var.domain_name}"
+    efs_mount_target = "${var.efs_mount_target}"
+    environment = "${var.environment}"
+  }
 }
 
 resource "aws_instance" "nextcloud" {
@@ -27,38 +33,6 @@ resource "aws_instance" "nextcloud" {
 
   tags {
     Name = "NextCloud"
-  }
-
-  provisioner "file" {
-    source = "${path.module}/provision.sh"
-    destination = "/tmp/provision.sh"
-
-    connection {
-      type     = "ssh"
-      user     = "ec2-user"
-    }
-  }
-
-  provisioner "file" {
-    source = "${path.module}/configs"
-    destination = "/tmp/"
-
-    connection {
-      type     = "ssh"
-      user     = "ec2-user"
-    }
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/provision.sh",
-      "sudo /tmp/provision.sh '${var.nextcloud_url}' '${var.domain_name}' '${var.efs_mount_target}'",
-    ]
-
-    connection {
-      type     = "ssh"
-      user     = "ec2-user"
-    }
   }
 
   lifecycle {

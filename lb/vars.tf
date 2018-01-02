@@ -11,7 +11,6 @@ variable "lb_name" {
 }
 variable "environment" {
   type = "string"
-  default = "staging"
 }
 variable "subnets" {
   type = "list"

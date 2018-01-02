@@ -3,14 +3,14 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = true
 
   tags {
-    Name = "Nextcloud ${var.environment_name} VPC"
+    Name = "Nextcloud ${var.environment} VPC"
   }
 }
 resource "aws_internet_gateway" "gw" {
   vpc_id = "${aws_vpc.vpc.id}"
 
   tags {
-    Name = "Nextcloud ${var.environment_name} VPC"
+    Name = "Nextcloud ${var.environment} VPC"
   }
 }
 resource "aws_route" "route" {
@@ -25,7 +25,7 @@ resource "aws_subnet" "public_1a" {
   map_public_ip_on_launch = true
 
   tags {
-    Name = "Public 1a - Nextcloud ${var.environment_name} VPC"
+    Name = "Public 1a - Nextcloud ${var.environment} VPC"
   }
 }
 resource "aws_subnet" "public_1b" {
@@ -35,7 +35,7 @@ resource "aws_subnet" "public_1b" {
   map_public_ip_on_launch = true
 
   tags {
-    Name = "Public 1b - Nextcloud ${var.environment_name} VPC"
+    Name = "Public 1b - Nextcloud ${var.environment} VPC"
   }
 }
 resource "aws_subnet" "public_1c" {
@@ -45,6 +45,6 @@ resource "aws_subnet" "public_1c" {
   map_public_ip_on_launch = true
 
   tags {
-    Name = "Public 1c Nextcloud ${var.environment_name} VPC"
+    Name = "Public 1c Nextcloud ${var.environment} VPC"
   }
 }

@@ -18,6 +18,7 @@ data "template_file" "user_data" {
     domain_name = "${var.domain_name}"
     efs_mount_target = "${var.efs_mount_target}"
     environment = "${var.environment}"
+    config_bucket = "${var.config_bucket}"
   }
 }
 

@@ -8,5 +8,8 @@ variable "name" {
 }
 variable "environment" {
   type = "string"
-  default = ""
+}
+variable "versioning" {
+  type = "string"
+  default = "true"
 }

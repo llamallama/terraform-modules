@@ -1,3 +1,7 @@
+variable "environment" {
+  type = "string"
+  default = ""
+}
 variable "vpc_id" {
   description = "The ID of the VPC"
 }
@@ -35,7 +39,6 @@ variable "count_num" {
 variable "efs_mount_target" {
   type = "string"
 }
-variable "environment" {
+variable "config_bucket" {
   type = "string"
-  default = ""
 }

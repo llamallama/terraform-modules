@@ -41,3 +41,8 @@ variable "efs_mount_target" {
 variable "config_bucket" {
   type = "string"
 }
+variable "tags" {
+  default = {
+    Name = "Nextcloud"
+  }
+}

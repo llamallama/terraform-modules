@@ -31,10 +31,7 @@ resource "aws_instance" "nextcloud" {
   vpc_security_group_ids = ["${var.security_groups}","${aws_security_group.nextcloud.id}"]
   subnet_id = "${element(var.subnet_ids, count.index)}"
   iam_instance_profile = "${var.iam_instance_profile}"
-
-  tags {
-    Name = "NextCloud"
-  }
+  tags = "${var.tags}"
 
   lifecycle {
     create_before_destroy = true

@@ -9,6 +9,10 @@ resource "aws_security_group" "nextcloud" {
     protocol = "tcp"
     cidr_blocks = ["${var.access_ip}"]
   }
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 data "template_file" "user_data" {

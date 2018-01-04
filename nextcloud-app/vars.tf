@@ -9,8 +9,7 @@ variable "subnet_ids" {
   type = "list"
 }
 variable "ami" {
-  description = "The AMI to use"
-  default = "ami-55ef662f"
+  type = "string"
 }
 variable "key_name" {
   description = "The key name to allow access with"
